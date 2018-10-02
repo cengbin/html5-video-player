@@ -1,0 +1,188 @@
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+button{
+  border:0;
+  outline:0;
+  cursor: pointer;
+}
+@mixin css3($property,$value){
+  @each $prefix in -webkit-,
+  -moz-,
+  -ms-,
+  -o-,
+  ''{
+    #{$prefix}#{$property}:$value;
+  }
+}
+// Positioning stuff
+@mixin position($position,$l:null,$t:null,$r:null,$b:null,$z:99) {
+  position: $position;
+  @if($l){
+    left: $l;
+  }
+  @if($t){
+    top:$t;
+  }
+  @if($r){
+    right: $r;
+  }
+  @if($b){
+    bottom: $b;
+  }
+  z-index: $z;
+}
+@mixin box($dis:block,$w:false,$h:false){
+  @if $dis!=block{
+    display: $dis;
+  }
+  @if $w{
+    width:$w;
+  }
+  @if $h{
+    height:$h;
+  }
+}
+
+.video-player{
+  position:relative;
+  //top:50%;
+  //width:100%;
+  //height:auto;
+  max-width: 1280px;
+  //margin:0 auto;
+  //@include css3(transform,translateY(-50%));
+  font-family: Arial,sans-serif;
+}
+.show{
+  display: block !important;
+}
+.player-tips{
+  @include position(absolute,0,0,null,null,8);
+  @include box(block,100%,100%);
+
+  .playing{
+    @include position(absolute,50%,50%,null,null,1);
+    @include box(block,50px,50px);
+    margin-left:-25px;
+    margin-top:-25px;
+    background:#000 url('../img/playing.png') no-repeat center center;
+  }
+  .waiting{
+    @include position(absolute,50%,50%,null,null,2);
+    @include box(none,50px,50px);
+    margin-left:-25px;
+    margin-top:-25px;
+    background-color:white;
+    text-align: center;
+    line-height:50px;
+    vertical-align: middle;
+    background-color:#000;
+    //background:#000 url('img/waiting.png') no-repeat center center;
+    img{
+      margin-top:10px;
+      -webkit-animation:rotate 3s linear 0s infinite;
+      animation:rotate 2s linear 0s infinite;
+    }
+  }
+  .warning{
+    @include position(absolute,50%,50%,null,null,3);
+    @include box(none,90px,130px);
+    margin-left:-45px;
+    margin-top:-65px;
+    //background:#000 url('img/playerIcons.png') no-repeat center center;
+  }
+  .replaying{
+    @include position(absolute,50%,50%,null,null,4);
+    @include box(none,50px,50px);
+    margin-left:-25px;
+    margin-top:-25px;
+    background:#000 url('../img/ended.png') no-repeat center center;
+  }
+}
+.player-controls{
+  @include position(absolute,0,null,null,0,9);
+  display:flex;
+  align-items: center;
+  width:100%;
+  height:40px;
+  background-color:black;
+  font-size: 12px;
+  color: white;
+
+  svg{
+    path{
+      fill:white;
+    }
+  }
+
+  .controls-left,
+  .controls-right{
+    display:flex;
+    width:100px;
+    align-items: center;
+
+    >div{
+      margin-left:16px;
+    }
+    .switch,
+    .mute-btn,
+    .fullscreen-btn{
+      cursor:pointer;
+      width:25px;
+      height:25px;
+      svg[class*=icon]{
+        display:none;
+      }
+    }
+    .play svg.icon-play,
+    .pause svg.icon-pause,
+    .stop svg.icon-stop,
+    .replay svg.icon-replay,
+    .mute-off svg.icon-music-off,
+    .mute-on svg.icon-music-on,
+    .fullscreen-on svg.icon-fullscreen-on,
+    .fullscreen-off svg.icon-fullscreen-off{
+      display:block;
+    }
+  }
+
+  .controls-right{
+    width:150px;
+  }
+
+  .process-bar{
+    cursor: pointer;
+    position:relative;
+    flex: auto;
+
+    .process-bg{
+      position:relative;height:3px;width:100%;;
+      background-color:#141414;
+      //background-color:hsla(0,0%,100%,.1);
+    }
+    .process-buffer{
+      position:absolute;height:3px;width:0;left:0;top:0;
+      background-color:#2c2c2c;
+      //background-color:hsla(0,0%,100%,.2);
+    }
+    .process-line{
+      position:absolute;height:3px;width:0;left:0;top:0;
+      background-color:#9b9b9b;
+      //background-color:#00a1d6;
+    }
+  }
+}
+
+@keyframes rotate {
+  0%{
+    -webkit-transform:rotate(0deg);
+  }
+  100%{
+    -webkit-transform:rotate(360deg);
+  }
+}

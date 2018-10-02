@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            background: #7A419B;
+            background: linear-gradient(135deg, #7c1599 0%, #921099 48%, #7e4ae8 100%);
+            background-size: cover;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player {
+            max-width: 750px;
+            max-height: 100%;
+            border: 5px solid rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        button.toggle.fullscreen::before {
+            font-family: "FontAwesome";
+            content: "\f065";
+            border: 0.2em solid white;
+            padding: 1px 0.3em;
+            border-radius: 0.4em;
+        }
+
+        .player.fullscreen .player__controls .toggle.fullscreen::before {
+            content: "\f066";
+        }
+
+        /* This css is only applied when fullscreen is active. */
+
+        .player.fullscreen {
+            max-width: none;
+            max-height: none;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+
+        .player.fullscreen video {
+            width: 100%;
+            height: auto;
+        }
+
+        .player__video {
+            max-width: 100%;
+            max-height: 100%;
+
+            /* These are the actual dimensions of the video. Avoid the
+            awkward element resize after the video loads. */
+            width: 640px;
+            height: 358px;
+        }
+
+        .player::after {
+            font-family: "FontAwesome";
+            color: white;
+            content: "\f110";
+            font-size: 3rem;
+            animation: spin 1s infinite steps(8);
+            position: absolute;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            margin-top: -0.5em;
+            margin-left: -0.5em;
+        }
+
+        @keyframes spin {
+            from  { transform: rotate(0deg); }
+            to    { transform: rotate(359deg); }
+        }
+
+        .player__button {
+            background: none;
+            border: 0;
+            line-height: 1;
+            color: white;
+            text-align: center;
+            outline: 0;
+            padding: 0;
+            cursor: pointer;
+            max-width: 50px;
+        }
+
+        .player__button:focus {
+            border-color: #ffc600;
+        }
+
+        .toggle::before {
+            font-family: "FontAwesome";
+            content: "\f04b";
+        }
+
+        .toggle.playing::before {
+            font-family: "FontAwesome";
+            content: "\f04c";
+        }
+
+        .player__slider {
+            width: 10px;
+            height: 30px;
+        }
+
+        .player__controls {
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            transform: translateY(100%) translateY(-5px);
+            transition: all .3s;
+            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .player:hover .player__controls,
+        .player.paused .player__controls
+        {
+            transform: translateY(0);
+        }
+
+        .player:hover .progress,
+        .player.paused .progress
+        {
+            height: 15px;
+        }
+
+        .player__controls > * {
+            flex: 1;
+        }
+
+        .progress {
+            flex: 10;
+            position: relative;
+            display: flex;
+            flex-basis: 100%;
+            height: 5px;
+            transition: height 0.3s;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: ew-resize;
+        }
+
+        .progress__filled {
+            width: 50%;
+            background: #ffc600;
+            flex: 0;
+            flex-basis: 0%;
+        }
+
+        .player__slider {
+            position: relative;
+        }
+
+        .player__slider::after {
+            content: attr(name);
+            position: absolute;
+            top: -2px;
+            text-shadow: 1px 1px 1px 0 rgba(0,0,0,0.5);
+            font-size: 0.8em;
+        }
+        /* unholy css to style input type="range" */
+
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+            width: 100%;
+            margin: 0 5px;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 1.3px;
+            border: 0.2px solid rgba(1, 1, 1, 0);
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+            height: 15px;
+            width: 15px;
+            border-radius: 50px;
+            background: #ffc600;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -3.5px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type=range]:focus::-wefbkit-slider-runnable-track {
+            background: #bada55;
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
+            background: #ffffff;
+            border-radius: 1.3px;
+            border: 0.2px solid rgba(1, 1, 1, 0);
+        }
+
+        input[type=range]::-moz-range-thumb {
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+            height: 15px;
+            width: 15px;
+            border-radius: 50px;
+            background: #ffc600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="player paused">
+        <video class="player__video viewer" src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></video>
+        <div class="player__controls">
+            <div class="progress">
+                <div class="progress__filled"></div>
+            </div>
+            <button class="player__button toggle" title="Play"></button>
+            <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
+            <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">
+            <button data-skip="-10" class="player__button"><i class="fa fa-step-backward"></i> 10s</button>
+            <button data-skip="25" class="player__button">25s <i class="fa fa-step-forward"></i></button>
+            <button class="player__button toggle fullscreen" title="Full Screen"></button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+  /* Get our elements. */
+  const player = document.querySelector('.player');
+  const video = player.querySelector('.viewer');
+  const progress = player.querySelector('.progress');
+  const progressBar = player.querySelector('.progress__filled');
+  const toggle = player.querySelector('.toggle');
+  const skipButtons = player.querySelectorAll('[data-skip]');
+  const ranges = player.querySelectorAll('.player__slider');
+  const fullscreen = player.querySelector('.fullscreen');
+
+  let isFullScreen = false;
+
+  /* Build our functions */
+  function togglePlay() {
+    const action = video.paused ? 'play' : 'pause';
+    video[action]();
+  }
+
+  function updatePlayIcon() {
+    toggle.classList.toggle('playing');
+    player.classList.toggle('paused');
+    if (toggle.classList.contains('playing')) {
+      toggle.setAttribute('title', 'Pause');
+    } else {
+      toggle.setAttribute('title', 'Play');
+    }
+  }
+
+  function skip() {
+    video.currentTime += parseFloat(this.dataset.skip);
+  }
+
+  function handleRangeUpdate() {
+    video[this.name] = this.value;
+  }
+
+  function handleProgress() {
+    const percent = (video.currentTime / video.duration) * 100;
+    progressBar.style.flexBasis = percent + '%';
+  }
+
+  function scrub(e) {
+    const seconds = (e.offsetX / progress.offsetWidth) * video.duration;
+    video.currentTime = seconds;
+  }
+
+  function toggleFullScreen(e) {
+    if (isFullScreen) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else {
+        console.error('Unable to find a fullscreen exit method.');
+      }
+      console.log('removing fullscreen class');
+    } else {
+      if (player.requestFullscreen) {
+        player.requestFullscreen(); // standard
+      } else if (player.webkitRequestFullscreen) {
+        player.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      } else if (player.mozRequestFullScreen) {
+        player.mozRequestFullScreen();
+      } else if (player.msRequestFullscreen) {
+        player.msRequestFullscreen();
+      } else {
+        console.error('Unable to find a fullscreen request method');
+      }
+    }
+  }
+
+  function toggleFullScreenClasses() {
+    player.classList.toggle('fullscreen');
+    isFullScreen = !isFullScreen;
+  }
+
+  /* Hook up the event listeners */
+  video.addEventListener('click', togglePlay);
+  toggle.addEventListener('click', togglePlay);
+
+  video.addEventListener('play', updatePlayIcon);
+  video.addEventListener('pause', updatePlayIcon);
+  video.addEventListener('timeupdate', handleProgress);
+
+  skipButtons.forEach(button => button.addEventListener('click', skip));
+
+  ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
+  ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
+
+  let mousedown = false;
+  progress.addEventListener('click', scrub);
+  progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+  progress.addEventListener('mousedown', () => mousedown = true);
+  progress.addEventListener('mouseup', () => mousedown = false);
+
+  fullscreen.addEventListener('click', toggleFullScreen);
+
+  document.addEventListener('fullscreenchange', toggleFullScreenClasses);
+  document.addEventListener('mozfullscreenchange', toggleFullScreenClasses);
+  document.addEventListener('webkitfullscreenchange', toggleFullScreenClasses);
+  document.addEventListener('msfullscreenchange', toggleFullScreenClasses);
+</script>

@@ -1,0 +1,166 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+button {
+  border: 0;
+  outline: 0;
+  cursor: pointer; }
+
+.video-player {
+  position: relative;
+  max-width: 1280px;
+  font-family: Arial,sans-serif; }
+
+.show {
+  display: block !important; }
+
+.player-tips {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 8;
+  width: 100%;
+  height: 100%; }
+  .player-tips .playing {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    margin-top: -25px;
+    background: #000 url("../img/playing.png") no-repeat center center; }
+  .player-tips .waiting {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    display: none;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    margin-top: -25px;
+    background-color: white;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    background-color: #000; }
+    .player-tips .waiting img {
+      margin-top: 10px;
+      -webkit-animation: rotate 3s linear 0s infinite;
+      animation: rotate 2s linear 0s infinite; }
+  .player-tips .warning {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    display: none;
+    width: 90px;
+    height: 130px;
+    margin-left: -45px;
+    margin-top: -65px; }
+  .player-tips .replaying {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 4;
+    display: none;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+    margin-top: -25px;
+    background: #000 url("../img/ended.png") no-repeat center center; }
+
+.player-controls {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: black;
+  font-size: 12px;
+  color: white; }
+  .player-controls svg path {
+    fill: white; }
+  .player-controls .controls-left,
+  .player-controls .controls-right {
+    display: flex;
+    width: 100px;
+    align-items: center; }
+    .player-controls .controls-left > div,
+    .player-controls .controls-right > div {
+      margin-left: 16px; }
+    .player-controls .controls-left .switch,
+    .player-controls .controls-left .mute-btn,
+    .player-controls .controls-left .fullscreen-btn,
+    .player-controls .controls-right .switch,
+    .player-controls .controls-right .mute-btn,
+    .player-controls .controls-right .fullscreen-btn {
+      cursor: pointer;
+      width: 25px;
+      height: 25px; }
+      .player-controls .controls-left .switch svg[class*=icon],
+      .player-controls .controls-left .mute-btn svg[class*=icon],
+      .player-controls .controls-left .fullscreen-btn svg[class*=icon],
+      .player-controls .controls-right .switch svg[class*=icon],
+      .player-controls .controls-right .mute-btn svg[class*=icon],
+      .player-controls .controls-right .fullscreen-btn svg[class*=icon] {
+        display: none; }
+    .player-controls .controls-left .play svg.icon-play,
+    .player-controls .controls-left .pause svg.icon-pause,
+    .player-controls .controls-left .stop svg.icon-stop,
+    .player-controls .controls-left .replay svg.icon-replay,
+    .player-controls .controls-left .mute-off svg.icon-music-off,
+    .player-controls .controls-left .mute-on svg.icon-music-on,
+    .player-controls .controls-left .fullscreen-on svg.icon-fullscreen-on,
+    .player-controls .controls-left .fullscreen-off svg.icon-fullscreen-off,
+    .player-controls .controls-right .play svg.icon-play,
+    .player-controls .controls-right .pause svg.icon-pause,
+    .player-controls .controls-right .stop svg.icon-stop,
+    .player-controls .controls-right .replay svg.icon-replay,
+    .player-controls .controls-right .mute-off svg.icon-music-off,
+    .player-controls .controls-right .mute-on svg.icon-music-on,
+    .player-controls .controls-right .fullscreen-on svg.icon-fullscreen-on,
+    .player-controls .controls-right .fullscreen-off svg.icon-fullscreen-off {
+      display: block; }
+  .player-controls .controls-right {
+    width: 150px; }
+  .player-controls .process-bar {
+    cursor: pointer;
+    position: relative;
+    flex: auto; }
+    .player-controls .process-bar .process-bg {
+      position: relative;
+      height: 3px;
+      width: 100%;
+      background-color: #141414; }
+    .player-controls .process-bar .process-buffer {
+      position: absolute;
+      height: 3px;
+      width: 0;
+      left: 0;
+      top: 0;
+      background-color: #2c2c2c; }
+    .player-controls .process-bar .process-line {
+      position: absolute;
+      height: 3px;
+      width: 0;
+      left: 0;
+      top: 0;
+      background-color: #9b9b9b; }
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+/*# sourceMappingURL=video-plyaer.css.map */
