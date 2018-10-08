@@ -93,11 +93,11 @@ button {
   .player-controls .controls-left,
   .player-controls .controls-right {
     display: flex;
-    width: 100px;
+    width: 90px;
     align-items: center; }
     .player-controls .controls-left > div,
     .player-controls .controls-right > div {
-      margin-left: 16px; }
+      margin-left: 10px; }
     .player-controls .controls-left .switch,
     .player-controls .controls-left .mute-btn,
     .player-controls .controls-left .fullscreen-btn,
@@ -132,7 +132,7 @@ button {
     .player-controls .controls-right .fullscreen-off svg.icon-fullscreen-off {
       display: block; }
   .player-controls .controls-right {
-    width: 150px; }
+    width: 120px; }
   .player-controls .process-bar {
     cursor: pointer;
     position: relative;

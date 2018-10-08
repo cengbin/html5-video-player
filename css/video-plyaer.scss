@@ -123,11 +123,11 @@ button{
   .controls-left,
   .controls-right{
     display:flex;
-    width:100px;
+    width:90px;
     align-items: center;
 
     >div{
-      margin-left:16px;
+      margin-left:10px;
     }
     .switch,
     .mute-btn,
@@ -152,7 +152,7 @@ button{
   }
 
   .controls-right{
-    width:150px;
+    width:120px;
   }
 
   .process-bar{
