@@ -12,10 +12,18 @@
         </video>
     </div>
     <div class="player-tips">
-        <div class="playing"></div>
-        <div class="waiting"><img src="img/waiting.png" alt=""></div>
+        <div class="playing">
+            <svg class="icon-play" viewBox="0 0 36 36">
+                <path d="M25.8 18c0 .6-.3 1.1-.8 1.3L12.5 27c-.2.1-.5.2-.8.2-.8 0-1.5-.6-1.5-1.5V10c0-.8.7-1.5 1.5-1.5.3 0 .5.1.8.2l12.7 7.9c.4.5.6.9.6 1.4z"></path>
+            </svg>
+        </div>
+        <div class="waiting"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAACAElEQVRIie3XTUvUURTH8fEJwSmUtCJCzMhn9CW4cNFC8A20D6VlQbSqVYva5HsIIQyiTbSpNm4NSsho6yKCaOEiiNI+LeaQ1+uM4//fZJsO3M059/y+92Hm3POvVEoYqngXo1pGoxlgAMN1/FP2bKpOfBgDZaF92MBnjGaxMezEGMtiE5Gzgb4y4H5sx64eFQA/jZxt9BcGh8hicqSXm4Exn8xfLAUNoTashdAGOsI/jt0Y4+HrwNuYu4a2o0J60VvHP5vs4nr4RhLfSCzwRuKbbaDflzvPxI62cA3dWXw1BD+iG11YjtGl9vf6EnNWs9zO0NzCm333jiH8SFa8hrkkPojnuIf2Ortpx/2YM5j45/Ay0f2Gc3nyBFbst2V0NbyfBoaLeJhprWDysKQFrCcJhQsBXiX561gokryE+aLQyL2D97hZJv+PDCeaTejBtFpRGMckeloEHw3ddEyjWlF7YdirRD/xrAXQB2oFZicb8LqCzQS820Lwcmjl8N/g/KinWnjUk6F58Kj/G67gLs4eF3ACj5OKs3Qc0CH7H4kXuHQc4PxZPPAC/U34wYf6Xxpu45ajtjItgl5N7v1kgbwLkoagKDRtb5+gM4s36tHG8B2flGlvHd7Q90aN38zhURK/4kPp3wxOq/8JM5NcwUyd+HmcKgVtsqBqsuNSBf8XyEiy3RVQmkAAAAAASUVORK5CYII=" alt=""></div>
         <div class="warning"></div>
-        <div class="replaying"></div>
+        <div class="replaying">
+            <svg class="icon-replay" viewBox="0 0 36 36">
+                <path d="M17.9 28c-4.9 0-9-3.6-9.8-8.3V19.4c0-.8.7-1.4 1.5-1.4s1.5.6 1.5 1.4c.8 3.8 4.5 6.2 8.3 5.4s6.2-4.5 5.4-8.3c-.7-3.2-3.5-5.6-6.9-5.6-1.8 0-3.6.7-4.8 2h1.3c.8 0 1.5.7 1.5 1.5s-.6 1.6-1.5 1.6h-4c-.8 0-1.5-.7-1.5-1.5v-4c0-.8.7-1.5 1.5-1.5.7 0 1.2.5 1.4 1.1C13.6 8.7 15.7 8 17.9 8c5.5 0 10 4.5 10 10s-4.4 10-10 10z"></path>
+            </svg>
+        </div>
     </div>
     <div class="player-controls">
         <div class="controls-left">
@@ -64,7 +72,7 @@
 </div>
 ```
 
-## CSS,JS
+## CSS
 
 ``` css
 <link rel="stylesheet" href="dist/video-player.min.css">
