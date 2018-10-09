@@ -26,8 +26,8 @@ function VideoPlayer(options) {
 };
 
 VideoPlayer.prototype.init=function(){
-  this._vp = $(this.setting.el);
-  this._video = this._vp.find("video")[0];
+  this._vp = document.getElementById(this.setting.el);
+  this._video = this._vp.querySelectorAll("video")[0];
   if (this.setting.url) this._video.src = this.setting.url;
   if (this.setting.volume != 1) this._video.volume = this.setting.volume;
   if (this.setting.autoplay) this._video.autoplay = this.setting.autoplay;

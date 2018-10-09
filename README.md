@@ -64,15 +64,16 @@
 </div>
 ```
 
-## CSS
+## CSS,JS
 
 ``` css
-<link rel="stylesheet" href="vp.css">
+<link rel="stylesheet" href="dist/video-player.min.css">
 ```
 
 ## JS
 
 ```js
+<script src="dist/videoplayer.min.js"></script>
 /**
 * @options
 * @param {String} el - 视频元素id
@@ -84,7 +85,7 @@
 */
 var options = {
 	el: "#video_wrap",
-	url: 'movie.mp4',////videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
+	url: 'movie.mp4',
 	autoplay: true,
 	loop: false,
 	volume: 1

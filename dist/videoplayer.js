@@ -1,5 +1,239 @@
+function _$(el){
+  el.text=function(text){
+    el.innerText=text;
+  }
+
+  el.addClass=function(cla){
+    return addClass(el,cla)
+  }
+  el.removeClass=function(cla){
+    return removeClass(el,cla);
+  }
+  el.css=function(name,value){
+    el.style[name]=value;
+  }
+
+  var display=_getComputedStyle(el,"display");
+  el.olddisplay=(display === "none" || display === "")?_defaultDisplay(el.nodeName):display;
+  el.show=function(){
+    if(el.style){
+      var display=el.style.display;
+      if(display === "" || display === "none"){
+        el.style.display=el.olddisplay;
+      }
+    }
+  }
+  el.hide=function(){
+    el.style.display='none';
+  }
+
+  el.click=function(fn){
+    el.addEventListener('click',fn);
+  }
+
+  return el;
+}
+
+/*
+* DOM添加类
+* @param {HTMLElement} element - DOM元素
+* @param {string} value - 类名
+* */
+function addClass(element, value) {
+  var rspace = /\s+/,
+    classNames,
+    i,
+    cl,
+    setClass;
+  if (element.nodeType === 1) {
+    if (value && typeof value === "string") {
+      classNames = value.split(rspace);
+      if (!element.className && classNames.length === 1) {
+        element.className = value;
+      } else {
+        setClass = " " + element.className + " ";
+        for (i = 0 , cl = classNames.length; i < cl; i++) {
+          if (!~setClass.indexOf(" " + classNames[i] + " ")) {
+            setClass += classNames[i] + " ";
+          }
+        }
+        element.className = setClass.trim();
+      }
+    }
+  }
+  return element;
+}
+
+/*
+* DOM删除类
+* */
+function removeClass(elem, value) {
+  var rspace = /\s+/;
+  var rclass = /[\n\t\r]/g;
+  var classNames,
+    className,
+    c,
+    cl;
+
+  if (elem.nodeType === 1 && elem.className) {
+    if ((value && typeof value === "string") || value === undefined) {
+      classNames = (value || "").split(rspace);
+
+      if (value) {
+        className = (" " + elem.className + " ").replace(rclass, " ");
+        for (c = 0, cl = classNames.length; c < cl; c++) {
+          className = className.replace(" " + classNames[c] + " ", " ");
+        }
+        elem.className = className.trim();
+
+      } else {
+        elem.className = "";
+      }
+    }
+  }
+
+  return elem;
+}
+
+/*
+* 判断DOM是否有某个类名
+* */
+function hasClass(element, selector) {
+  var rclass = /[\n\t\r]/g;
+  var className = " " + selector + " ";
+  if ((" " + element.className + " ").replace(rclass, " ").indexOf(className) > -1) {
+    return true;
+  }
+  return false;
+}
+
+/*
+* DOM添加/删除类的切换操作
+* */
+function toggleClass(elem, value) {
+  var rspace = /\s+/;
+  // toggle individual class names
+  var className,
+    i = 0,
+    classNames = value.split(rspace),
+    fn;
+
+  while ((className = classNames[i++])) {
+    fn = hasClass(elem, className) ? removeClass : addClass;
+    fn(elem, className);
+  }
+  return elem;
+}
+
+//小于10前面加0
+var t = function (num) {
+  if (num < 10) {
+    return '0' + num.toString();
+  }
+  return num;
+}
+
+//秒转换成时分秒
+function formatTime(time) {
+  var hours = '', minutes = '', seconds = '';
+  if (time > 0) {
+    seconds = t(parseInt(time % 60));
+    if (time >= 60) {
+      minutes = t(parseInt(time / 60 % 60)) + ':';
+      if (time >= 3600) {
+        hours = t(parseInt(time / 3600 % 24)) + ':';
+      }
+    } else {
+      minutes = '00:'
+    }
+  } else {
+    seconds = '00:00';
+  }
+  return hours + minutes + seconds;
+}
+
+var _getComputedStyle;
+if (document.defaultView && document.defaultView.getComputedStyle) {
+  _getComputedStyle = function (elem, name) {
+    var ret, defaultView, computedStyle, width,
+      style = elem.style;
+
+    name = name.replace(/([A-Z]|^ms)/g, "-$1").toLowerCase();
+
+    if ((defaultView = elem.ownerDocument.defaultView) &&
+      (computedStyle = defaultView.getComputedStyle(elem, null))) {
+
+      ret = computedStyle.getPropertyValue(name);
+    }
+
+    // A tribute to the "awesome hack by Dean Edwards"
+    // WebKit uses "computed value (percentage if specified)" instead of "used value" for margins
+    // which is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
+    /*if ( !jQuery.support.pixelMargin && computedStyle && rmargin.test( name ) && rnumnonpx.test( ret ) ) {
+      width = style.width;
+      style.width = ret;
+      ret = computedStyle.width;
+      style.width = width;
+    }*/
+
+    return ret;
+  };
+}
+
+var _elemdisplay={};
+function _defaultDisplay(nodeName){
+  if(!_elemdisplay[nodeName]){
+    var body=document.body;
+    var elem=document.createElement(nodeName);
+    body.appendChild(elem);
+    var display=_getComputedStyle(elem,'display');
+    body.removeChild(elem);
+    _elemdisplay[nodeName]=display;
+    // console.log('_defaultDisplay:',elem,display);
+  }
+  return _elemdisplay[nodeName];
+}
+/**
+ * 视频播放器对象
+ * @param {Object} options - 播放器初始化选项
+ * */
+function VideoPlayer(options) {
+  /**
+   * @options
+   * @param {String} el - 视频元素id *
+   * @param {String} url - 视频地址 *
+   * @param {Number} volume - 音量
+   * @param {Boolean} autoplay - 是否自动播放视频
+   * @param {Boolean} loop - 是否循环播放视频
+   * @param {Boolean} mute - 是否静音播放视频
+   */
+  var setting = {
+    el: null,
+    url: null,
+    volume: 1,
+    autoplay: false,
+    loop: false,
+    mute: false
+  }
+  this.setting = Object.assign(setting, options);
+
+  this.init()
+};
+
+VideoPlayer.prototype.init=function(){
+  this._vp = document.getElementById(this.setting.el);
+  this._video = this._vp.querySelectorAll("video")[0];
+  if (this.setting.url) this._video.src = this.setting.url;
+  if (this.setting.volume != 1) this._video.volume = this.setting.volume;
+  if (this.setting.autoplay) this._video.autoplay = this.setting.autoplay;
+  if (this.setting.loop) this._video.loop = this.setting.loop;
+  if (this.setting.mute) this._video.mute = this.setting.mute;
+
+  this.videoControl = new VideoControl(this._vp, this._video, this.setting);
+  this.videoControl.init();
+}
 function VideoControl(vp, video, options) {
-  this._options=options;
+  this._options = options;
   this._onState = null;
   this._onMute = null;
   this._isFullScreen = false;
@@ -31,29 +265,29 @@ function VideoControl(vp, video, options) {
 };
 
 VideoControl.prototype = {
-  toggleFullScreenClasses: function(){
+  toggleFullScreenClasses: function () {
     this._fullScreenBtn.removeClass('fullscreen-off fullscreen-on');
-    if(this.fullScreen){
+    if (this.fullScreen) {
       this._fullScreenBtn.addClass('fullscreen-off');
-    }else{
+    } else {
       this._fullScreenBtn.addClass('fullscreen-on')
     }
   },
-  set fullScreen(value){
-    this._isFullScreen=value;
+  set fullScreen(value) {
+    this._isFullScreen = value;
     this.toggleFullScreenClasses();
   },
-  get fullScreen(){
+  get fullScreen() {
     return this._isFullScreen;
   },
   set onMute(value) {
     this._onMute = value;
     this._muteBtn.removeClass('mute-off mute-on');
 
-    if (value){
+    if (value) {
       this._muteBtn.addClass('mute-on');
       this._video.muted = true;
-    }else{
+    } else {
       this._muteBtn.addClass('mute-off');
       this._video.muted = false;
     }
@@ -88,7 +322,7 @@ VideoControl.prototype = {
       ct = parseInt(this._video.currentTime),
       n = ct / length * 100;
 
-    this._processLine.css({width: n + "%"});
+    this._processLine.css("width",n + "%");
 
     this._timeCurrent.text(formatTime(ct));
   },
@@ -134,17 +368,19 @@ VideoControl.prototype = {
 VideoControl.prototype.init = function () {
   var scope = this;
 
-  this._vp.mouseover(function (event) {
+  this._vp.addEventListener("mouseover",function (event) {
     scope._playerControls.show();
-  }).mouseout(function (event) {
+  })
+  this._vp.addEventListener("mouseout",function (event) {
     if (scope._onState == null || scope._onState == 'pause' || scope._onState == 'ended') {
 
     } else {
       scope._playerControls.hide();
     }
-  });
+  })
 
-  this._playerTips = this._vp.find(".player-tips").click(function (e) {
+  this._playerTips = this.getChildEle(".player-tips");
+  this._playerTips.click(function (e) {
     e.stopPropagation(); //不再派发事件
     if (scope._onState == 'ended') {
       scope.toPlay();
@@ -153,12 +389,13 @@ VideoControl.prototype.init = function () {
       scope.togglePlay();
     }
   });
-  this._playing = this._vp.find('.playing');
-  this._waiting = this._vp.find('.waiting');
-  this._replaying = this._vp.find('.replaying');
+  this._playing = this.getChildEle('.playing');
+  this._waiting = this.getChildEle('.waiting');
+  this._replaying = this.getChildEle('.replaying');
 
-  this._playerControls = this._vp.find('.player-controls');
-  this._switchBtn = this._vp.find('.switch').click(function (e) {
+  this._playerControls = this.getChildEle('.player-controls');
+  this._switchBtn = this.getChildEle('.switch');
+  this._switchBtn.click(function (e) {
     e.stopPropagation(); //不再派发事件
     if (scope._onState == 'ended') {
       scope.toPlay();
@@ -167,36 +404,42 @@ VideoControl.prototype.init = function () {
       scope.togglePlay();
     }
   });
-  this._timeCurrent = this._vp.find('.time-current').text(formatTime(0));
-  this._timeDuration = this._vp.find('.time-duration').text(formatTime(0));
-  this._processBar = this._vp.find('.process-bar').click(function (e) {
-    var offsetX = e.offsetX, barWidth = $(e.currentTarget).width();
+  this._timeCurrent = this.getChildEle('.time-current');
+  this._timeCurrent.text(formatTime(0));
+  this._timeDuration = this.getChildEle('.time-duration');
+  this._timeDuration.text(formatTime(0));
+  this._processBar = this.getChildEle('.process-bar');
+  this._processBar.click(function (e) {
+    var offsetX = e.offsetX,
+      barWidth = e.currentTarget.offsetWidth;
     var n = (offsetX / barWidth);
     var d = scope._video.duration;
     var ct = n * d;
     console.log(offsetX, barWidth, n, ct, d);
     scope.seek(ct);
   });
-  this._processBuffer = this._vp.find('.process-buffer');
-  this._processLine = this._vp.find('.process-line');
+  this._processBuffer = this.getChildEle('.process-buffer');
+  this._processLine = this.getChildEle('.process-line');
 
-  this._muteBtn = this._vp.find(".mute-btn").click(function (e) {
+  this._muteBtn = this.getChildEle(".mute-btn");
+  this._muteBtn.click(function (e) {
     e.stopPropagation();
     scope.onMute = !scope.onMute;
   });
 
-  this._fullScreenBtn = this._vp.find('.fullscreen-btn').click(function(e){
+  this._fullScreenBtn = this.getChildEle('.fullscreen-btn');
+  this._fullScreenBtn.click(function (e) {
     scope.toggleFullScreen()
   });
-  ['fullscreenchange','mozfullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(function(value){
-    document.addEventListener(value, function(){
-      scope.fullScreen= !scope.fullScreen;
+  ['fullscreenchange', 'mozfullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(function (value) {
+    document.addEventListener(value, function () {
+      scope.fullScreen = !scope.fullScreen;
     });
   })
 
   this.addVideoEvents(this._video);
 
-  this.onMute=this._options.mute;
+  this.onMute = this._options.mute;
 }
 
 VideoControl.prototype.addVideoEvents = function (_v) {
@@ -270,7 +513,7 @@ VideoControl.prototype.addVideoEvents = function (_v) {
   _v.addEventListener("error", this.videoError, false);
 }
 
-VideoControl.prototype.toggleFullScreen=function() {
+VideoControl.prototype.toggleFullScreen = function () {
   if (this.fullScreen) {
     if (document.exitFullscreen) {
       document.exitFullscreen();
@@ -285,7 +528,7 @@ VideoControl.prototype.toggleFullScreen=function() {
     }
     // console.log('removing fullscreen class');
   } else {
-    var player=this._vp[0];
+    var player = this._vp;
     if (player.requestFullscreen) {
       player.requestFullscreen(); // standard
     } else if (player.webkitRequestFullscreen) {
@@ -321,29 +564,8 @@ VideoControl.prototype.videoError = function () {
   this.showWarning();
 }
 
-//小于10前面加0
-var t = function (num) {
-  if (num < 10) {
-    return '0' + num.toString();
-  }
-  return num;
+VideoControl.prototype.getChildEle = function (el) {
+  el=this._vp.querySelector(el);
+  return _$(el);
 }
 
-//秒转换成时分秒
-var formatTime = function (time) {
-  var hours = '', minutes = '', seconds = '';
-  if (time > 0) {
-    seconds = t(parseInt(time % 60));
-    if (time >= 60) {
-      minutes = t(parseInt(time / 60 % 60)) + ':';
-      if (time >= 3600) {
-        hours = t(parseInt(time / 3600 % 24)) + ':';
-      }
-    } else {
-      minutes = '00:'
-    }
-  } else {
-    seconds = '00:00';
-  }
-  return hours + minutes + seconds;
-}

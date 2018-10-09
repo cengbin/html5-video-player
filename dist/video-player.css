@@ -5,19 +5,14 @@
   margin: 0;
   padding: 0; }
 
-button {
-  border: 0;
-  outline: 0;
-  cursor: pointer; }
-
 .video-player {
-  position: relative;
-  max-width: 1280px;
-  font-family: Arial,sans-serif; }
+  position: relative; }
+  .video-player svg path {
+    fill: white; }
 
-.show {
-  display: block !important; }
-
+/*.show{
+  display: block !important;
+}*/
 .player-tips {
   position: absolute;
   left: 0;
@@ -25,29 +20,43 @@ button {
   z-index: 8;
   width: 100%;
   height: 100%; }
-  .player-tips .playing {
+  .player-tips .playing,
+  .player-tips .replaying {
+    cursor: pointer;
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     z-index: 1;
+    display: none;
     width: 50px;
     height: 50px;
-    margin-left: -25px;
-    margin-top: -25px;
-    background: #000 url("../img/playing.png") no-repeat center center; }
+    margin: auto;
+    background-color: black; }
+    .player-tips .playing svg,
+    .player-tips .replaying svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99;
+      width: 30px;
+      height: 30px;
+      margin: auto; }
   .player-tips .waiting {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     z-index: 2;
     display: none;
     width: 50px;
     height: 50px;
-    margin-left: -25px;
-    margin-top: -25px;
-    background-color: white;
+    margin: auto;
     text-align: center;
-    line-height: 50px;
     vertical-align: middle;
     background-color: #000; }
     .player-tips .waiting img {
@@ -64,17 +73,6 @@ button {
     height: 130px;
     margin-left: -45px;
     margin-top: -65px; }
-  .player-tips .replaying {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 4;
-    display: none;
-    width: 50px;
-    height: 50px;
-    margin-left: -25px;
-    margin-top: -25px;
-    background: #000 url("../img/ended.png") no-repeat center center; }
 
 .player-controls {
   position: absolute;
@@ -88,8 +86,6 @@ button {
   background-color: black;
   font-size: 12px;
   color: white; }
-  .player-controls svg path {
-    fill: white; }
   .player-controls .controls-left,
   .player-controls .controls-right {
     display: flex;
@@ -163,4 +159,4 @@ button {
   100% {
     -webkit-transform: rotate(360deg); } }
 
-/*# sourceMappingURL=video-plyaer.css.map */
+/*# sourceMappingURL=video-player.css.map */

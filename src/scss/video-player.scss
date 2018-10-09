@@ -5,11 +5,6 @@
   margin:0;
   padding:0;
 }
-button{
-  border:0;
-  outline:0;
-  cursor: pointer;
-}
 @mixin css3($property,$value){
   @each $prefix in -webkit-,
   -moz-,
@@ -50,39 +45,41 @@ button{
 
 .video-player{
   position:relative;
-  //top:50%;
-  //width:100%;
-  //height:auto;
-  max-width: 1280px;
-  //margin:0 auto;
-  //@include css3(transform,translateY(-50%));
-  font-family: Arial,sans-serif;
+  svg{
+    path{
+      fill:white;
+    }
+  }
 }
-.show{
+/*.show{
   display: block !important;
-}
+}*/
 .player-tips{
   @include position(absolute,0,0,null,null,8);
   @include box(block,100%,100%);
 
-  .playing{
-    @include position(absolute,50%,50%,null,null,1);
-    @include box(block,50px,50px);
-    margin-left:-25px;
-    margin-top:-25px;
-    background:#000 url('../img/playing.png') no-repeat center center;
+  .playing,
+  .replaying{
+    cursor:pointer;
+    @include position(absolute,0,0,0,0,1);
+    @include box(none,50px,50px);
+    margin:auto;
+    background-color:black;
+
+    svg{
+      @include position(absolute,0,0,0,0);
+      width:30px;
+      height:30px;
+      margin:auto;
+    }
   }
   .waiting{
-    @include position(absolute,50%,50%,null,null,2);
+    @include position(absolute,0,0,0,0,2);
     @include box(none,50px,50px);
-    margin-left:-25px;
-    margin-top:-25px;
-    background-color:white;
+    margin:auto;
     text-align: center;
-    line-height:50px;
     vertical-align: middle;
     background-color:#000;
-    //background:#000 url('img/waiting.png') no-repeat center center;
     img{
       margin-top:10px;
       -webkit-animation:rotate 3s linear 0s infinite;
@@ -94,14 +91,6 @@ button{
     @include box(none,90px,130px);
     margin-left:-45px;
     margin-top:-65px;
-    //background:#000 url('img/playerIcons.png') no-repeat center center;
-  }
-  .replaying{
-    @include position(absolute,50%,50%,null,null,4);
-    @include box(none,50px,50px);
-    margin-left:-25px;
-    margin-top:-25px;
-    background:#000 url('../img/ended.png') no-repeat center center;
   }
 }
 .player-controls{
@@ -113,12 +102,6 @@ button{
   background-color:black;
   font-size: 12px;
   color: white;
-
-  svg{
-    path{
-      fill:white;
-    }
-  }
 
   .controls-left,
   .controls-right{
