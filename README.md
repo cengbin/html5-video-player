@@ -1,4 +1,7 @@
-# PC+Mobile 自适应简洁的HTML5视频播放器
+# HTML5视频播放器
+
+PC+Mobile端自适应简洁的视频播放器  
+[Check out the demo here.](https://urlzengbin.github.io/html5-video-player/src/index.html)
 
 ## HTML
 ```
