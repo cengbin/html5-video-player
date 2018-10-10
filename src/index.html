@@ -3,7 +3,7 @@
     <title>VideoPlayer</title>
     <meta charset="utf-8"/>
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="../dist/video-player.css">
+    <link rel="stylesheet" href="video-player.css">
 </head>
 <body>
 <div class="video-player" id="video_wrap" style="width: auto;max-width:800px;margin:0 auto;">
@@ -74,12 +74,13 @@
         </div>
     </div>
 </div>
-
-<script src="../dist/videoplayer.js"></script>
+<script src="util.js"></script>
+<script src="VideoControl.js"></script>
+<script src="VideoPlayer.js"></script>
 <script>
   var options = {
     el: "video_wrap",
-    url: 'media/movie.mp4',////videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
+    url: 'movie.mp4',////videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
     autoplay: true,
     loop: false,
     volume: .1,

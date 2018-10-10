@@ -1,7 +1,10 @@
 .idea
 .DS_Store
 
-test
 node_modules
 package-lock.json
-example/media/film.mp4
+
+test
+src/film.mp4
+src/video-player.scss
+src/video-player.css.map
