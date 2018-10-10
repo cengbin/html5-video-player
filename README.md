@@ -78,7 +78,7 @@
 <link rel="stylesheet" href="dist/video-player.min.css">
 ```
 
-## JS
+## JavaSript
 
 ```js
 <script src="dist/videoplayer.min.js"></script>
