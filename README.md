@@ -1,4 +1,4 @@
-# 简洁的HTML5视频播放器
+# PC+Mobile 自适应简洁的HTML5视频播放器
 
 ## HTML
 ```
