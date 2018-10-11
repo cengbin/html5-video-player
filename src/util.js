@@ -1,4 +1,4 @@
-function _$(el){
+export function _$(el){
   el.text=function(text){
     el.innerText=text;
   }
@@ -39,7 +39,7 @@ function _$(el){
 * @param {HTMLElement} element - DOM元素
 * @param {string} value - 类名
 * */
-function addClass(element, value) {
+export function addClass(element, value) {
   var rspace = /\s+/,
     classNames,
     i,
@@ -67,7 +67,7 @@ function addClass(element, value) {
 /*
 * DOM删除类
 * */
-function removeClass(elem, value) {
+export function removeClass(elem, value) {
   var rspace = /\s+/;
   var rclass = /[\n\t\r]/g;
   var classNames,
@@ -98,7 +98,7 @@ function removeClass(elem, value) {
 /*
 * 判断DOM是否有某个类名
 * */
-function hasClass(element, selector) {
+export function hasClass(element, selector) {
   var rclass = /[\n\t\r]/g;
   var className = " " + selector + " ";
   if ((" " + element.className + " ").replace(rclass, " ").indexOf(className) > -1) {
@@ -110,7 +110,7 @@ function hasClass(element, selector) {
 /*
 * DOM添加/删除类的切换操作
 * */
-function toggleClass(elem, value) {
+export function toggleClass(elem, value) {
   var rspace = /\s+/;
   // toggle individual class names
   var className,
@@ -126,7 +126,7 @@ function toggleClass(elem, value) {
 }
 
 //小于10前面加0
-var t = function (num) {
+export var t = function (num) {
   if (num < 10) {
     return '0' + num.toString();
   }
@@ -134,7 +134,7 @@ var t = function (num) {
 }
 
 //秒转换成时分秒
-function formatTime(time) {
+export function formatTime(time) {
   var hours = '', minutes = '', seconds = '';
   if (time > 0) {
     seconds = t(parseInt(time % 60));
@@ -152,7 +152,7 @@ function formatTime(time) {
   return hours + minutes + seconds;
 }
 
-var _getComputedStyle;
+export var _getComputedStyle;
 if (document.defaultView && document.defaultView.getComputedStyle) {
   _getComputedStyle = function (elem, name) {
     var ret, defaultView, computedStyle, width,
@@ -181,7 +181,7 @@ if (document.defaultView && document.defaultView.getComputedStyle) {
 }
 
 var _elemdisplay={};
-function _defaultDisplay(nodeName){
+export function _defaultDisplay(nodeName){
   if(!_elemdisplay[nodeName]){
     var body=document.body;
     var elem=document.createElement(nodeName);

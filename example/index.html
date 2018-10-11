@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>VideoPlayer</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+<div id="video_wrap" style="width: auto;max-width:800px;margin:0 auto;"></div>
+<script src="../dist/videoplayer.js"></script>
+<script>
+  var options = {
+    el: "video_wrap",
+    url: 'movie.mp4',////videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
+    poster:'video_default.jpg',
+    autoplay: false,
+    loop: false,
+    volume: 1,
+    mute: false
+  }
+  var vp = new dk.VideoPlayer(options);
+</script>
+</body>
+</html>

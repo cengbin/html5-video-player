@@ -1,4 +1,9 @@
-function VideoControl(vp, video, options) {
+import {
+  formatTime,
+  _$
+} from "./util";
+
+export function VideoControl(vp, video, options) {
   this._options = options;
   this._onState = null;
   this._onMute = null;
@@ -334,4 +339,3 @@ VideoControl.prototype.getChildEle = function (el) {
   el=this._vp.querySelector(el);
   return _$(el);
 }
-

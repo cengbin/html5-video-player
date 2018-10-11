@@ -5,6 +5,4 @@ node_modules
 package-lock.json
 
 test
-src/film.mp4
-src/video-player.scss
-src/video-player.css.map
+example/film.mp4
