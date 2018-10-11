@@ -19,7 +19,7 @@ let vp=new VideoPlayer(options);
 
 ##### 引用videoplayer.js的正确方法和使用:
 ```js
-<script src="dist/videoplayer.min.js"></script>
+<script src="dist/videoplayer.js"></script>
 
 var vp = new dk.VideoPlayer(options);
 ```
