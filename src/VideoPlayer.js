@@ -107,7 +107,7 @@ VideoPlayer.prototype.init = function () {
   this.videoControl.init();
 }
 
-/*if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") {
   console.log('development');
   var options = {
     el: "video_wrap",
@@ -119,4 +119,4 @@ VideoPlayer.prototype.init = function () {
     mute: false
   }
   var vp = new VideoPlayer(options);
-}*/
+}

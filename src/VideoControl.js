@@ -1,5 +1,7 @@
 import {
   formatTime,
+  addClass,
+  removeClass,
   _$
 } from "./util";
 
@@ -40,8 +42,10 @@ VideoControl.prototype = {
     this._fullScreenBtn.removeClass('fullscreen-off fullscreen-on');
     if (this.fullScreen) {
       this._fullScreenBtn.addClass('fullscreen-off');
+      addClass(this._vp,'vp-fullscreen');
     } else {
       this._fullScreenBtn.addClass('fullscreen-on')
+      removeClass(this._vp,'vp-fullscreen');
     }
   },
   set fullScreen(value) {
