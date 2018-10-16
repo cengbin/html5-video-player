@@ -66,7 +66,6 @@ let _vphtml =`
   </div>
 </div>`
 
-
 import './video-player.scss'
 import {VideoControl} from './VideoControl.js'
 
@@ -107,8 +106,16 @@ VideoPlayer.prototype.init = function () {
   this.videoControl.init();
 }
 
-if (process.env.NODE_ENV === "development") {
-  console.log('development');
+/*if (process.env.NODE_ENV === "development") {
+  let meta=document.createElement('meta');
+  meta.name='viewport';
+  meta.content="width=device-width, initial-scale=1.0, maximum-scale=1.0";
+  document.head.appendChild(meta);
+
+  let vconsole=document.createElement('script');
+  vconsole.src='//ycimg.m.duoku.com/cimages/img/promo/gametemplate/common/js/vconsole.min.js';
+  document.body.appendChild(vconsole);
+
   var options = {
     el: "video_wrap",
     url: './movie.mp4',
@@ -119,4 +126,4 @@ if (process.env.NODE_ENV === "development") {
     mute: false
   }
   var vp = new VideoPlayer(options);
-}
+}*/

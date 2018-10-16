@@ -15,11 +15,12 @@ module.exports = {
     libraryTarget: 'umd'
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    host: '0.0.0.0'
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'video player'
+      title: 'video player',
     }),
     new CopyWebpackPlugin([
       {

@@ -42,10 +42,10 @@ VideoControl.prototype = {
     this._fullScreenBtn.removeClass('fullscreen-off fullscreen-on');
     if (this.fullScreen) {
       this._fullScreenBtn.addClass('fullscreen-off');
-      addClass(this._vp,'vp-fullscreen');
+      addClass(this._vp, 'vp-fullscreen');
     } else {
       this._fullScreenBtn.addClass('fullscreen-on')
-      removeClass(this._vp,'vp-fullscreen');
+      removeClass(this._vp, 'vp-fullscreen');
     }
   },
   set fullScreen(value) {
@@ -77,6 +77,7 @@ VideoControl.prototype = {
       this.showWaiting();
     } else if (value == 'playing') {
       this._switchBtn.removeClass('play pause').addClass('pause');
+      this._replaying.hide();
     } else if (value == 'pause') {
       this._switchBtn.removeClass('play pause').addClass('play');
     } else if (value == 'ended') {
@@ -97,7 +98,7 @@ VideoControl.prototype = {
       ct = parseInt(this._video.currentTime),
       n = ct / length * 100;
 
-    this._processLine.css("width",n + "%");
+    this._processLine.css("width", n + "%");
 
     this._timeCurrent.text(formatTime(ct));
   },
@@ -143,10 +144,10 @@ VideoControl.prototype = {
 VideoControl.prototype.init = function () {
   var scope = this;
 
-  this._vp.addEventListener("mouseover",function (event) {
+  this._vp.addEventListener("mouseover", function (event) {
     scope._playerControls.show();
   })
-  this._vp.addEventListener("mouseout",function (event) {
+  this._vp.addEventListener("mouseout", function (event) {
     if (scope._onState == null || scope._onState == 'pause' || scope._onState == 'ended') {
 
     } else {
@@ -299,7 +300,7 @@ VideoControl.prototype.toggleFullScreen = function () {
     } else if (document.msExitFullscreen) {
       document.msExitFullscreen();
     } else {
-      console.error('Unable to find a fullscreen exit method.');
+      // console.error('Unable to find a fullscreen exit method.');
     }
     // console.log('removing fullscreen class');
   } else {
@@ -313,7 +314,9 @@ VideoControl.prototype.toggleFullScreen = function () {
     } else if (player.msRequestFullscreen) {
       player.msRequestFullscreen();
     } else {
-      console.error('Unable to find a fullscreen request method');
+      const video = this._video;
+      video.webkitEnterFullScreen();
+      // console.error('Unable to find a fullscreen request method');
     }
   }
 }
@@ -340,6 +343,6 @@ VideoControl.prototype.videoError = function () {
 }
 
 VideoControl.prototype.getChildEle = function (el) {
-  el=this._vp.querySelector(el);
+  el = this._vp.querySelector(el);
   return _$(el);
 }
