@@ -223,7 +223,6 @@ VideoControl.prototype.init = function () {
   this.onMute = this._options.mute;
 
   this.onState=this._video.paused?"pause":"";
-  console.log(this.onState);
 }
 
 VideoControl.prototype.addVideoEvents = function (_v) {
