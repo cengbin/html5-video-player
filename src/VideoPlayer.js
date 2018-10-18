@@ -69,6 +69,8 @@ let _vphtml =`
 import './video-player.scss'
 import {VideoControl} from './VideoControl.js'
 
+window._vpdebug=(/eruda=true/.test (window.location) || localStorage.getItem ('active-eruda') == 'true');
+
 export function VideoPlayer(options) {
   var setting = {
     el: null,
@@ -118,7 +120,7 @@ VideoPlayer.prototype.init = function () {
 
   var options = {
     el: "video_wrap",
-    url: './movie.mp4',
+    url: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
     poster: './video_default.jpg',
     autoplay: false,
     loop: false,

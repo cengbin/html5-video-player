@@ -78,12 +78,17 @@ VideoControl.prototype = {
     } else if (value == 'playing') {
       this._switchBtn.removeClass('play pause').addClass('pause');
       this._replaying.hide();
+      this._playing.hide();
     } else if (value == 'pause') {
       this._switchBtn.removeClass('play pause').addClass('play');
+      this._playing.show();
     } else if (value == 'ended') {
       this.showEnded();
       this._playerControls.show();
     }
+  },
+  get onState(){
+    return this._onState;
   },
   showPause: function () {
   },
@@ -216,23 +221,26 @@ VideoControl.prototype.init = function () {
   this.addVideoEvents(this._video);
 
   this.onMute = this._options.mute;
+
+  this.onState=this._video.paused?"pause":"";
+  console.log(this.onState);
 }
 
 VideoControl.prototype.addVideoEvents = function (_v) {
   var scope = this;
   //当音频/视频处于加载过程中时，会依次发生以下事件：
   _v.addEventListener("loadstart", function () {//客户端开始请求数据
-    console.log('1、loadstart、客户端开始请求数据');
+    if(window._vpdebug)console.log('1、loadstart、客户端开始请求数据');
   }, false);
   _v.addEventListener("durationchange", function () {//资源长度改变
-    console.log('2、durationchange、资源长度改变');
+    if(window._vpdebug)console.log('2、durationchange、资源长度改变');
     scope._timeDuration.text(formatTime(_v.duration));
   }, false);
   _v.addEventListener("loadedmetadata", function () {
-    console.log('3、loadedmetadata、');
+    if(window._vpdebug)console.log('3、loadedmetadata、');
   }, false);
   _v.addEventListener("loadeddata", function () {
-    console.log('4、loadeddata、');
+    if(window._vpdebug)console.log('4、loadeddata、');
   }, false);
   _v.addEventListener("progress", function () {
     var log = '5、progress、';
@@ -241,35 +249,35 @@ VideoControl.prototype.addVideoEvents = function (_v) {
       log += '正在缓冲：' + n + '%';
       scope.setProcess(n);
     }
-    console.log(log);
+    if(window._vpdebug)console.log(log);
   }, false);
   _v.addEventListener("canplay", function () {
-    console.log('6、canplay、缓冲已足够开始时。-----每次卡住，再缓冲成功都会调用此方法');
+    if(window._vpdebug)console.log('6、canplay、缓冲已足够开始时。-----每次卡住，再缓冲成功都会调用此方法');
     scope.hideWaiting();
-    scope._playing.hide();
+    // scope._playing.hide();
   }, false);
   _v.addEventListener("canplaythrough", function () {
-    console.log('7、canplaythrough、当媒介能够无需因缓冲而停止即可播放至结尾时运行的脚本。');
+    if(window._vpdebug)console.log('7、canplaythrough、当媒介能够无需因缓冲而停止即可播放至结尾时运行的脚本。');
   }, false);
 
 
   _v.addEventListener("waiting", function () {
-    console.log('waiting,当媒介已停止播放但打算继续播放时（比如当媒介暂停已缓冲更多数据）运行脚本');
+    if(window._vpdebug)console.log('waiting,当媒介已停止播放但打算继续播放时（比如当媒介暂停已缓冲更多数据）运行脚本');
     scope.onState = 'waiting';
   }, false);
   _v.addEventListener("play", function () {
-    console.log('play,当媒介已就绪可以开始播放时运行的脚本。')
+    if(window._vpdebug)console.log('play,当媒介已就绪可以开始播放时运行的脚本。')
   }, false);
   _v.addEventListener("playing", function () {
-    console.log('playing,当媒介已开始播放时运行的脚本。-----加载提示影藏');
+    if(window._vpdebug)console.log('playing,当媒介已开始播放时运行的脚本。-----加载提示影藏');
     scope.onState = 'playing';
   }, false);
   _v.addEventListener("pause", function () {
-    console.log('pause,当媒介被用户或程序暂停时运行的脚本。-----视频播放结束也会调用此方法');
+    if(window._vpdebug)console.log('pause,当媒介被用户或程序暂停时运行的脚本。-----视频播放结束也会调用此方法');
     scope.onState = 'pause';
   }, false);
   _v.addEventListener("ended", function () {
-    console.log('ended,当媒介已到达结尾（可发送类似“感谢观看”之类的消息）。');
+    if(window._vpdebug)console.log('ended,当媒介已到达结尾（可发送类似“感谢观看”之类的消息）。');
     scope.onState = 'ended';
     scope.seek(0);
   }, false);
@@ -338,7 +346,7 @@ VideoControl.prototype.videoError = function () {
     case 4:
       err.error = "播放过程中URL无效"
   }
-  console.log(JSON.stringify(err));
+  if(window._vpdebug)console.log(JSON.stringify(err));
   this.showWarning();
 }
 
