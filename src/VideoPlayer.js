@@ -1,6 +1,6 @@
 let _vphtml =`
 <div class="video-wrap">
-  <video preload="auto" poster="" src=""
+  <video poster="" src=""
     webkit-playsinline="true"
     x-webkit-airplay="true"
     x5-video-player-type="h5"
@@ -97,12 +97,17 @@ VideoPlayer.prototype.init = function () {
   this._vp = vpEle;
 
   this._video = this._vp.querySelectorAll("video")[0];
+  if (this.setting.preload) this._video.preload = this.setting.preload;
   if (this.setting.url) this._video.src = this.setting.url;
   if (this.setting.poster) this._video.poster = this.setting.poster;
   if (this.setting.volume != 1) this._video.volume = this.setting.volume;
   if (this.setting.autoplay) this._video.autoplay = this.setting.autoplay;
   if (this.setting.loop) this._video.loop = this.setting.loop;
   if (this.setting.mute) this._video.mute = this.setting.mute;
+  if (this.setting.videoCSSWidth) this._video.style.width = this.setting.videoCSSWidth;
+  if (this.setting.videoCSSHeight) this._video.style.height = this.setting.videoCSSHeight;
+  if (this.setting.videoWidth) this._video.width = this.setting.videoWidth;
+  if (this.setting.videoHeight) this._video.height = this.setting.videoHeight;
 
   this.videoControl = new VideoControl(this._vp, this._video, this.setting);
   this.videoControl.init();
@@ -125,7 +130,12 @@ VideoPlayer.prototype.init = function () {
     autoplay: false,
     loop: false,
     volume: 1,
-    mute: false
+    mute: false,
+    videoCSSWidth:'400px',
+    videoCSSHeight:'400px',
+    videoWidth:'200',
+    videoHeight:'200',
+    preload:"meta"
   }
   var vp = new VideoPlayer(options);
 }*/
