@@ -21,6 +21,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [path.resolve(__dirname,'src')]
+      },
+      {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader',"sass-loader"]
       },

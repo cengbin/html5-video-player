@@ -292,8 +292,9 @@ VideoControl.prototype.addVideoEvents = function (_v) {
   _v.addEventListener("timeupdate", function () {
     scope.updateBar();
   }, false);
-
-  _v.addEventListener("error", this.videoError, false);
+  _v.addEventListener("error", function(){
+    scope.videoError();
+  }, false);
 }
 
 VideoControl.prototype.toggleFullScreen = function () {
