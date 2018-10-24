@@ -83,6 +83,7 @@ VideoControl.prototype = {
       this._switchBtn.removeClass('play pause').addClass('play');
       this._playing.show();
     } else if (value == 'ended') {
+      this._playing.hide();
       this.showEnded();
       this._playerControls.show();
     }

@@ -79,18 +79,23 @@
   @include box(block,100%,100%);
 
   .playing,
-  .replaying{
+  .replaying,
+  .warning{
     cursor:pointer;
     @include position(absolute,0,0,0,0,1);
-    @include box(none,50px,50px);
+    @include box(none,3.125em,3.125em);
     margin:auto;
-    background-color:black;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 2.5em;
 
     svg{
       @include position(absolute,0,0,0,0);
-      width:30px;
-      height:30px;
+      width:2em;
+      height:2em;
       margin:auto;
+    }
+    .cls-1{
+      fill:#f7a455 !important;
     }
   }
   .waiting{
@@ -99,18 +104,13 @@
     margin:auto;
     text-align: center;
     vertical-align: middle;
-    background-color:#000;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 2.5em;
     img{
       margin-top:10px;
       -webkit-animation:rotate 3s linear 0s infinite;
       animation:rotate 2s linear 0s infinite;
     }
-  }
-  .warning{
-    @include position(absolute,50%,50%,null,null,3);
-    @include box(none,90px,130px);
-    margin-left:-45px;
-    margin-top:-65px;
   }
 }
 .player-controls{
@@ -190,5 +190,11 @@
   }
   100%{
     -webkit-transform:rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .video-player{
+    font-size:10px;
   }
 }
