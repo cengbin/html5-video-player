@@ -1,11 +1,7 @@
 let _vphtml =`
 <div class="video-wrap">
-  <video poster="" src=""
-    webkit-playsinline="true"
-    x-webkit-airplay="true"
-    x5-video-player-type="h5"
-    playsinline>
-  您的浏览器不支持 video 标签。
+  <video>
+    您的浏览器不支持 video 标签。
   </video>
 </div>
 <div class="player-tips">
@@ -80,42 +76,29 @@ import {VideoControl} from './VideoControl.js'
 window._vpdebug=(/eruda=true/.test (window.location) || localStorage.getItem ('active-eruda') == 'true');
 
 export function VideoPlayer(options) {
-  var setting = {
-    el: null,
-    url: null,
-    volume: 1,
-    autoplay: false,
-    loop: false,
-    mute: false
-  }
-  this.setting = Object.assign(setting, options);
-
+  this.setting = Object.assign({el: null}, options);
   this.init()
 };
 
 VideoPlayer.prototype.init = function () {
-  let el = document.getElementById(this.setting.el)
-  this._vpContainer = el || document.body;
-  // console.log('this._vpContainer:', this._vpContainer);
+  this._vpContainer = document.getElementById(this.setting.el)|| document.body ;
+  delete this.setting.el;
 
   let vpEle = document.createElement('div');
   vpEle.className = 'video-player';
   vpEle.innerHTML = _vphtml;
   this._vpContainer.appendChild(vpEle);
   this._vp = vpEle;
-
   this._video = this._vp.querySelectorAll("video")[0];
-  if (this.setting.preload) this._video.preload = this.setting.preload;
-  if (this.setting.url) this._video.src = this.setting.url;
-  if (this.setting.poster) this._video.poster = this.setting.poster;
-  if (this.setting.volume != 1) this._video.volume = this.setting.volume;
-  if (this.setting.autoplay) this._video.autoplay = this.setting.autoplay;
-  if (this.setting.loop) this._video.loop = this.setting.loop;
-  if (this.setting.mute) this._video.mute = this.setting.mute;
-  if (this.setting.videoCSSWidth) this._video.style.width = this.setting.videoCSSWidth;
-  if (this.setting.videoCSSHeight) this._video.style.height = this.setting.videoCSSHeight;
-  if (this.setting.videoWidth) this._video.width = this.setting.videoWidth;
-  if (this.setting.videoHeight) this._video.height = this.setting.videoHeight;
+
+  for(let key in this.setting){
+    let val= this.setting[key];
+    if(key.slice(0,3) === 'CSS'){
+      this._video.style[key.slice(3)]=val
+    }else{
+      this._video.setAttribute(key,val);
+    }
+  }
 
   this.videoControl = new VideoControl(this._vp, this._video, this.setting);
   this.videoControl.init();
@@ -133,13 +116,14 @@ VideoPlayer.prototype.init = function () {
 
   var options = {
     el: "video_wrap",
-    url: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
+    src: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
     poster: './video_default.jpg',
-    autoplay: false,
-    loop: false,
-    volume: 1,
-    mute: false,
-    preload:"meta"
+    preload: "meta",
+    mute:'mute',
+    "webkit-playsinline":true,
+    "x-webkit-airplay":true,
+    "x5-video-player-type":"h5",
+    "playsinline":true,
   }
   var vp = new VideoPlayer(options);
 }*/

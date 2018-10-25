@@ -25,24 +25,37 @@ var vp = new dk.VideoPlayer(options);
 ```
 
 ##### options对象介绍
+
+| key | 值 | 描述|
+| ------ | ------ | ------ |
+| el | {String} | 视频播放器容器元素id,默认body |
+| CSS* | {any} | 以CSS开头的属性名会自动添加到video标签行内样式 |
+| * | {any} | 其他属性自动添加到video标签的属性 |
+
+示例：
+
 ```
 /**
 * @options
-* @param {String} el - 视频播放器容器元素id
-* @param {String} url - 视频地址
-* @param {Number} volume - 音量
-* @param {Boolean} autoplay - 是否自动播放视频
-* @param {Boolean} loop - 是否循环播放视频
-* @param {Boolean} mute - 是否静音播放视频
+* @param el - 视频播放器容器元素id
+* @param url - 视频地址
+* @param autoplay - 是否自动播放视频
+* @param loop - 是否循环播放视频
+* @param mute - 是否静音播放视频
 */
 var options = {
-    el: "video_wrap",
-    url: 'movie.mp4',
-    poster:'video_default.jpg',
-    autoplay: false,
-    loop: false,
-    volume: 1,
-    mute: false
+    "el": "video_wrap",
+    "url": 'movie.mp4',
+    "poster":'video_default.jpg',
+    "autoplay":'autoplay',
+    "loop":'loop',
+    "mute":"mute",
+    "webkit-playsinline":true,
+    "x-webkit-airplay":true,
+    "x5-video-player-type":"h5",
+    "playsinline":true,
+    "CSSwidth":'320px',
+    "CSSheight":'240px'
 }
 ```
 

@@ -5,18 +5,23 @@
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-<div id="video_wrap" style="width: auto;max-width:800px;margin:0 auto;"></div>
-<script src="//ycimg.m.duoku.com/cimages/img/promo/gametemplate/common/js/vconsole.min.js"></script>
+<div style="text-align: center;">
+    <div id="video_wrap" style="width: auto;max-width:800px;margin:50px auto 0;"></div>
+</div>
+<!--<script src="//ycimg.m.duoku.com/cimages/img/promo/gametemplate/common/js/vconsole.min.js"></script>-->
 <script src="../dist/videoplayer.js"></script>
 <script>
   var options = {
     el: "video_wrap",
-    url: 'movie.mp4',////videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
-    poster:'video_default.jpg',
-    autoplay: false,
-    loop: false,
-    volume: 1,
-    mute: false
+    src: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
+    poster: './video_default.jpg',
+    preload: "meta",
+    mute:'mute',
+    autoplay:'autoplay',
+    "webkit-playsinline":true,
+    "x-webkit-airplay":true,
+    "x5-video-player-type":"h5",
+    "playsinline":true
   }
   var vp = new dk.VideoPlayer(options);
 </script>
