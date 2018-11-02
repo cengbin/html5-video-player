@@ -45,7 +45,7 @@ var vp = new dk.VideoPlayer(options);
 */
 var options = {
     "el": "video_wrap",
-    "url": 'movie.mp4',
+    "src": 'movie.mp4',
     "poster":'video_default.jpg',
     "autoplay":'autoplay',
     "loop":'loop',
