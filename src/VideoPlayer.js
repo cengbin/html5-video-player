@@ -108,7 +108,7 @@ VideoPlayer.prototype.init = function () {
   this.videoControl.init();
 }
 
-if (process.env.NODE_ENV === "development") {
+/*if (process.env.NODE_ENV === "development") {
   let meta = document.createElement('meta');
   meta.name = 'viewport';
   meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
@@ -135,4 +135,4 @@ if (process.env.NODE_ENV === "development") {
     }
   }
   var vp = new VideoPlayer(options);
-}
+}*/
