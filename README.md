@@ -26,36 +26,42 @@ var vp = new dk.VideoPlayer(options);
 
 ##### options对象介绍
 
-| key | 值 | 描述|
+| key | 值类型 | 描述|
 | ------ | ------ | ------ |
 | el | {String} | 视频播放器容器元素id,默认body |
-| CSS* | {any} | 以CSS开头的属性名会自动添加到video标签行内样式 |
-| * | {any} | 其他属性自动添加到video标签的属性 |
+| attributes | {Object} | 添加到video标签的属性 |
+| style | {Object} | 添加到video标签行内样式 |
 
 示例：
 
 ```
 /**
 * @options
-* @param el - 视频播放器容器元素id
-* @param url - 视频地址
-* @param autoplay - 是否自动播放视频
-* @param loop - 是否循环播放视频
-* @param mute - 是否静音播放视频
+* el - 视频播放器容器元素id
+* src - 视频地址
+* poster - 规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像
+* preload - 视频在页面加载时进行加载，并预备播放
+* autoplay - 是否自动播放视频
+* loop - 是否循环播放视频
+* mute - 是否静音播放视频
 */
 var options = {
-    "el": "video_wrap",
-    "src": 'movie.mp4',
-    "poster":'video_default.jpg',
-    "autoplay":'autoplay',
-    "loop":'loop',
-    "mute":"mute",
-    "webkit-playsinline":true,
-    "x-webkit-airplay":true,
-    "x5-video-player-type":"h5",
-    "playsinline":true,
-    "CSSwidth":'320px',
-    "CSSheight":'240px'
-}
+    el: "video_wrap",
+    attributes:{
+      src: './movie.mp4',
+      poster: './video_default.jpg',
+      preload: "meta",
+      autoplay: "autoplay",
+      loop: "loop",
+      mute:'mute',
+      "webkit-playsinline":true,
+      "x-webkit-airplay":true,
+      "x5-video-player-type":"h5",
+      "playsinline":true,
+    },
+    style:{
+      'box-shadow': '10px 10px 5px #888888'
+    }
+  }
 ```
 

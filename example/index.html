@@ -13,15 +13,20 @@
 <script>
   var options = {
     el: "video_wrap",
-    src: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
-    poster: './video_default.jpg',
-    preload: "meta",
-    mute:'mute',
-    autoplay:'autoplay',
-    "webkit-playsinline":true,
-    "x-webkit-airplay":true,
-    "x5-video-player-type":"h5",
-    "playsinline":true
+    attributes: {
+      src: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
+      poster: './video_default.jpg',
+      preload: "meta",
+      mute:'mute',
+      autoplay:'autoplay',
+      "webkit-playsinline":true,
+      "x-webkit-airplay":true,
+      "x5-video-player-type":"h5",
+      "playsinline":true
+    },
+    style: {
+      'box-shadow': '10px 10px 5px #888888'
+    }
   }
   var vp = new dk.VideoPlayer(options);
 </script>

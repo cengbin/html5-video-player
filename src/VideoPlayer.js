@@ -1,4 +1,4 @@
-let _vphtml =`
+let _vphtml = `
 <div class="video-wrap">
   <video>
     您的浏览器不支持 video 标签。
@@ -73,7 +73,7 @@ let _vphtml =`
 import './video-player.scss'
 import {VideoControl} from './VideoControl.js'
 
-window._vpdebug=(/eruda=true/.test (window.location) || localStorage.getItem ('active-eruda') == 'true');
+window._vpdebug = (/eruda=true/.test(window.location) || localStorage.getItem('active-eruda') == 'true');
 
 export function VideoPlayer(options) {
   this.setting = Object.assign({el: null}, options);
@@ -81,8 +81,7 @@ export function VideoPlayer(options) {
 };
 
 VideoPlayer.prototype.init = function () {
-  this._vpContainer = document.getElementById(this.setting.el)|| document.body ;
-  delete this.setting.el;
+  this._vpContainer = document.getElementById(this.setting.el) || document.body;
 
   let vpEle = document.createElement('div');
   vpEle.className = 'video-player';
@@ -91,12 +90,17 @@ VideoPlayer.prototype.init = function () {
   this._vp = vpEle;
   this._video = this._vp.querySelectorAll("video")[0];
 
-  for(let key in this.setting){
-    let val= this.setting[key];
-    if(key.slice(0,3) === 'CSS'){
-      this._video.style[key.slice(3)]=val
-    }else{
-      this._video.setAttribute(key,val);
+  let attributes = this.setting.attributes;
+  if (attributes) {
+    for (let key in attributes) {
+      this._video.setAttribute(key, attributes[key]);
+    }
+  }
+
+  let style = this.setting.style;
+  if (style) {
+    for (let key in style) {
+      this._video.style[key] = style[key]
     }
   }
 
@@ -104,26 +108,31 @@ VideoPlayer.prototype.init = function () {
   this.videoControl.init();
 }
 
-/*if (process.env.NODE_ENV === "development") {
-  let meta=document.createElement('meta');
-  meta.name='viewport';
-  meta.content="width=device-width, initial-scale=1.0, maximum-scale=1.0";
+if (process.env.NODE_ENV === "development") {
+  let meta = document.createElement('meta');
+  meta.name = 'viewport';
+  meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
   document.head.appendChild(meta);
 
-  let vconsole=document.createElement('script');
-  vconsole.src='//ycimg.m.duoku.com/cimages/img/promo/gametemplate/common/js/vconsole.min.js';
+  let vconsole = document.createElement('script');
+  vconsole.src = '//ycimg.m.duoku.com/cimages/img/promo/gametemplate/common/js/vconsole.min.js';
   document.body.appendChild(vconsole);
 
   var options = {
     el: "video_wrap",
-    src: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
-    poster: './video_default.jpg',
-    preload: "meta",
-    mute:'mute',
-    "webkit-playsinline":true,
-    "x-webkit-airplay":true,
-    "x5-video-player-type":"h5",
-    "playsinline":true,
+    attributes: {
+      src: './movie.mp4',// //videos.akqa.com/work/nike/nba-connected-jersey/film.mp4
+      poster: './video_default.jpg',
+      preload: "meta",
+      mute: 'mute',
+      "webkit-playsinline": true,
+      "x-webkit-airplay": true,
+      "x5-video-player-type": "h5",
+      "playsinline": true,
+    },
+    style: {
+      'box-shadow': '10px 10px 5px #888888'
+    }
   }
   var vp = new VideoPlayer(options);
-}*/
+}
