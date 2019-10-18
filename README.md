@@ -1,7 +1,7 @@
 # HTML5视频播放器
 
 PC+Mobile端自适应简洁的视频播放器,无需引入其他插件
-[Check out the demo here.](https://urlzengbin.github.io/html5-video-player/example/index.html)
+[Check out the demo here.](https://iiig.github.io/html5-video-player/example/index.html)
 
 ## HTML
 ```
