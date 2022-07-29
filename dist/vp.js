@@ -405,18 +405,18 @@
             createElement("div", {class: "warning"}),
             createElement("div", {class: "replaying"}),
           ]),
-          // createElement("div", {class: "player-controls"}, [
-          //   createElement("div", {class: "switch play"}),
-          //   createElement("div", {class: "time-current"}),
-          //   createElement("div", {class: "process-bar"}, [
-          //     createElement("div", {class: "process-bg"}),
-          //     createElement("div", {class: "process-buffer"}),
-          //     createElement("div", {class: "process-line"}),
-          //   ]),
-          //   createElement("div", {class: "time-duration"}),
-          //   createElement("div", {class: "mute-btn mute-off"}),
-          //   createElement("div", {class: "fullscreen-btn fullscreen-on"}),
-          // ])
+          createElement("div", {class: "player-controls"}, [
+            createElement("div", {class: "switch play"}),
+            createElement("div", {class: "time-current"}),
+            createElement("div", {class: "process-bar"}, [
+              createElement("div", {class: "process-bg"}),
+              createElement("div", {class: "process-buffer"}),
+              createElement("div", {class: "process-line"}),
+            ]),
+            createElement("div", {class: "time-duration"}),
+            createElement("div", {class: "mute-btn mute-off"}),
+            createElement("div", {class: "fullscreen-btn fullscreen-on"}),
+          ])
         ]
       );
       // console.log(dom)
