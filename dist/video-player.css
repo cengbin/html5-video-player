@@ -1,0 +1,118 @@
+.video-player {
+  position: relative;
+  display: inline-block; }
+  .video-player * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; }
+  .video-player .video-wrap video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%; }
+  .video-player .player-tips {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 8;
+    width: 100%;
+    height: 100%; }
+    .video-player .player-tips .playing,
+    .video-player .player-tips .replaying,
+    .video-player .player-tips .warning,
+    .video-player .player-tips .waiting {
+      cursor: pointer;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      display: none;
+      width: 50px;
+      height: 50px;
+      margin: auto;
+      border-radius: 2.5em;
+      background: rgba(0, 0, 0, 0.4) no-repeat center center; }
+    .video-player .player-tips .waiting {
+      -webkit-animation: rotate 3s linear 0s infinite;
+      animation: rotate 2s linear 0s infinite; }
+    .video-player .player-tips .playing {
+      background-image: url("../example/icon/play.png"); }
+    .video-player .player-tips .waiting {
+      background-image: url("../example/icon/waiting.png"); }
+    .video-player .player-tips .warning {
+      background-image: url("../example/icon/warning.png"); }
+    .video-player .player-tips .replaying {
+      background-image: url("../example/icon/replay.png"); }
+  .video-player .player-controls {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 0 8px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAoCAYAAAA/tpB3AAAAaklEQVQImQXBIQ6CAAAAwCOYaCQq1Uy10810goVgoRAsBgPFYDAQDASCG4GNzY2NMYPjTd5BADsIIYIYEthDCgfI4Ag5FHCCEs5QQQ0XuMINGrjDA57Qwgs66OENA4wwwQdmWGCFL/xg+wNVVBN0BYgYPAAAAABJRU5ErkJggg==") repeat-x bottom;
+    font-size: 10px;
+    color: white; }
+    .video-player .player-controls > div {
+      margin: 4px; }
+    .video-player .player-controls .switch,
+    .video-player .player-controls .mute-btn,
+    .video-player .player-controls .fullscreen-btn {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      background: transparent no-repeat center center;
+      background-size: 100% 100%; }
+    .video-player .player-controls .switch.play {
+      background-image: url("../example/icon/play.png"); }
+    .video-player .player-controls .switch.pause {
+      background-image: url("../example/icon/pause.png"); }
+    .video-player .player-controls .mute-btn.mute-off {
+      background-image: url("../example/icon/mute-off.png"); }
+    .video-player .player-controls .mute-btn.mute-on {
+      background-image: url("../example/icon/mute-on.png"); }
+    .video-player .player-controls .fullscreen-btn.fullscreen-on {
+      background-image: url("../example/icon/fullscreen-on.png"); }
+    .video-player .player-controls .fullscreen-btn.fullscreen-off {
+      background-image: url("../example/icon/fullscreen-off.png"); }
+    .video-player .player-controls .process-bar {
+      cursor: pointer;
+      position: relative;
+      flex: auto; }
+      .video-player .player-controls .process-bar .process-bg {
+        position: relative;
+        height: 3px;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.2); }
+      .video-player .player-controls .process-bar .process-buffer {
+        position: absolute;
+        height: 3px;
+        width: 0;
+        left: 0;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.3); }
+      .video-player .player-controls .process-bar .process-line {
+        position: absolute;
+        height: 3px;
+        width: 0;
+        left: 0;
+        top: 0;
+        background-color: #00a1d6; }
+  .video-player.vp-fullscreen .video-wrap {
+    width: 100%;
+    height: 100%; }
+    .video-player.vp-fullscreen .video-wrap video {
+      height: 100%; }
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+/*# sourceMappingURL=video-player.css.map */

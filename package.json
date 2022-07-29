@@ -1,37 +1,16 @@
 {
-  "name": "html5-video-player",
+  "name": "video_player",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/videoplayer.js",
-  "directories": {
-    "example": "example",
-    "test": "test"
-  },
+  "main": "./src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rollup --config rollup.config.js  -w"
   },
-  "author": "",
+  "author": "abin",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "copy-webpack-plugin": "^4.5.3",
-    "css-loader": "^1.0.0",
-    "file-loader": "^2.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
+    "rollup": "^1.27.8",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-watch": "^4.3.1"
   }
 }
