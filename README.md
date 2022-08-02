@@ -25,7 +25,7 @@ new vp.VideoPlayer({
 
 | key | 值类型 | 描述|
 | ------ | ------ | ------ |
-| video | `{String | HtmlVideoElement}` | video标签元素id或video标签元素 |
+| video | `{String,HtmlVideoElement}` | video标签元素id或video标签元素 |
 
 示例：
 
