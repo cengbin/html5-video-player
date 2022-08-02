@@ -4,14 +4,14 @@
   (global = global || self, factory(global.vp = {}));
 }(this, (function (exports) { 'use strict';
 
-  function VideoControl(vp, video, options) {
+  function VideoControl(el, video, options) {
     this._options = options;
     this._onState = null;
     this._onMute = null;
     this._onFullScreen = false;
 
     // 视频div层
-    this._videoplayer = $(vp);
+    this.$el = $(el);
     // 视频对象
     this._video = video;
 
@@ -45,10 +45,10 @@
       this._fullScreenBtn.removeClass('fullscreen-off fullscreen-on');
       if (this.onFullScreen) {
         this._fullScreenBtn.addClass('fullscreen-off');
-        this._videoplayer.addClass('vp-fullscreen');
+        this.$el.addClass('vp-fullscreen');
       } else {
         this._fullScreenBtn.addClass('fullscreen-on');
-        this._videoplayer.removeClass('vp-fullscreen');
+        this.$el.removeClass('vp-fullscreen');
       }
     },
     updateBar: function () {
@@ -158,7 +158,7 @@
   VideoControl.prototype.init = function () {
     var scope = this;
 
-    this._videoplayer.mouseover(function (event) {
+    this.$el.mouseover(function (event) {
       scope._playerControls.show();
     }).mouseout(function (event) {
       if (scope._onState == null || scope._onState == 'pause' || scope._onState == 'ended') ; else {
@@ -318,7 +318,7 @@
       }
       // console.log('removing fullscreen class');
     } else {
-      var player = this._videoplayer[0];
+      var player = this.$el[0];
       if (player.requestFullscreen) {
         player.requestFullscreen(); // standard
       } else if (player.webkitRequestFullscreen) {
@@ -357,7 +357,7 @@
   };
 
   VideoControl.prototype.getChildEle = function (el) {
-    el = this._videoplayer[0].querySelector(el);
+    el = this.$el[0].querySelector(el);
     return $(el)
   };
 
@@ -397,7 +397,7 @@
     init: function () {
       var createElement = this.createElement;
       var {video} = this.options;
-      var dom = createElement("div", {class: "video-player"}, [
+      var el = createElement("div", {class: "video-player"}, [
           createElement("div", {class: "video-wrap"}),
           createElement("div", {class: "player-tips"}, [
             createElement("div", {class: "playing"}),
@@ -419,18 +419,18 @@
           ])
         ]
       );
-      // console.log(dom)
+      // console.log(el)
 
       if (video && typeof video === 'string') {
         video = this.options.video = document.querySelector(video);
       }
       video.controls && (video.controls = false);
 
-      this.insertAfter(dom, video);
+      this.insertAfter(el, video);
 
-      dom.querySelector(".video-wrap").appendChild(video);
+      el.querySelector(".video-wrap").appendChild(video);
 
-      this.videoControl = new VideoControl(dom, video, this.options);
+      this.videoControl = new VideoControl(el, video, this.options);
       this.videoControl.init();
     },
 

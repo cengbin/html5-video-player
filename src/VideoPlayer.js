@@ -9,7 +9,7 @@ VideoPlayer.prototype = {
   init: function () {
     var createElement = this.createElement
     var {video} = this.options
-    var dom = createElement("div", {class: "video-player"}, [
+    var el = createElement("div", {class: "video-player"}, [
         createElement("div", {class: "video-wrap"}),
         createElement("div", {class: "player-tips"}, [
           createElement("div", {class: "playing"}),
@@ -31,18 +31,18 @@ VideoPlayer.prototype = {
         ])
       ]
     )
-    // console.log(dom)
+    // console.log(el)
 
     if (video && typeof video === 'string') {
       video = this.options.video = document.querySelector(video)
     }
     video.controls && (video.controls = false)
 
-    this.insertAfter(dom, video)
+    this.insertAfter(el, video)
 
-    dom.querySelector(".video-wrap").appendChild(video)
+    el.querySelector(".video-wrap").appendChild(video)
 
-    this.videoControl = new VideoControl(dom, video, this.options)
+    this.videoControl = new VideoControl(el, video, this.options)
     this.videoControl.init()
   },
 
