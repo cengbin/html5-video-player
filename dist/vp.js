@@ -438,28 +438,35 @@
       existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
     },
 
-    createElement: function (tag, data, children) {
-      var domElement = document.createElement(tag);
+    createElement: function (tag, attrs, children) {
+      var element = document.createElement(tag);
 
-      for (var s in data) {
+      for (var s in attrs) {
         if (s === 'class') {
-          domElement.className = data[s];
+          element.className = attrs[s];
         } else if (s === 'style') {
-          var styleObj = data[s];
+          var styleObj = attrs[s];
           for (var attr in styleObj) {
-            domElement.style[attr] = styleObj[attr];
+            element.style[attr] = styleObj[attr];
           }
         } else {
-          domElement[s] = data[s];
+          element[s] = attrs[s];
         }
       }
 
       if (children) {
         children = Array.isArray(children) ? children : [children];
-        children.forEach(child => domElement.appendChild(child));
+        children.forEach(child => {
+          if (typeof child === 'string') {
+            let text = document.createTextNode(child);
+            element.appendChild(text);
+          } else {
+            element.appendChild(child);
+          }
+        });
       }
 
-      return domElement
+      return element
     }
   };
 
