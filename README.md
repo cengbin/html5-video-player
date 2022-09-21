@@ -14,10 +14,10 @@ PC+Mobile端自适应简洁的视频播放器
 ```js
 <link rel="stylesheet" href="../dist/video-player.css">
 
-<script src="../dist/vp.js"></script>
+<script src="../dist/video-player.js"></script>
 
 new vp.VideoPlayer({
-	video: "#video2"
+    video: "#video2"
 })
 ```
 
