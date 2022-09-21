@@ -1,5 +1,5 @@
 {
-  "name": "video_player",
+  "name": "html5-video-player",
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.js",

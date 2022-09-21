@@ -3,7 +3,7 @@ import copy from 'rollup-plugin-copy'
 export default {
   input: 'src/index.js',
   output: {
-    file: 'dist/vp.js',
+    file: 'dist/video-player.js',
     format: 'umd',
     name: 'vp'
   },

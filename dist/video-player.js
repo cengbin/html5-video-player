@@ -470,7 +470,7 @@
     }
   };
 
-  const version = '0.0.1';
+  const version = '1.0.0';
 
   exports.VideoPlayer = VideoPlayer;
   exports.version = version;
